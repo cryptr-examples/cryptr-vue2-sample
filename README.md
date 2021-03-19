@@ -1,91 +1,54 @@
 # Cryptr with Vue2
 
-## 03 Integrate the cryptr plugin
+## 04 Add your Cryptr credentials
 
-The best way to effectively implement a user authentication flow is to create a reusable wrapper around Cryptr's SDK to integrate directly into Vue to take advantage from all the Cryptr features.
+Now, we do the necessary to make able Cryptr to identify your app & perform well the authentication.
 
-In this way, the Cryptr SDK  will fit well with Vue JS. You just need to add the follow file **CryptrPlugin.js**  as Vue2 plugin **in your src**  :
+Add a **dot env file** to provide to your environment with your shell.
 
-``` javascript
-// src/CryptrPlugin.js 
-
-import Vue from "vue";
-import CryptrSPA from "@cryptr/cryptr-spa-js";
-
-let clientWrapper;
-
-const isRedirectFromCryptr = () =>
-  window.location.search.includes("code=") &&
-  window.location.search.includes("state=");
-
-export const getCryptrClient = () => clientWrapper;
-
-const setCryptrClientWrapper = options => {
-  if (clientWrapper) {
-    return clientWrapper;
-  }
-
-  clientWrapper = new Vue({
-    data() {
-      return {
-        client: null,
-        error: null,
-        isAuthenticated: false,
-        canRefresh: false,
-        loading: true,
-        user: null
-      };
-    },
-
-    async created() {
-      this.client = await CryptrSPA.createClient(options);
-      this.loading = true;
-      this.isAuthentcated = this.client.isAuthentcated;
-      this.canRefresh = this.client.canRefresh(this.client.getRefreshStore());
-      try {
-        // 1. When user is returning to its browser
-        if (!this.isAuthenticated && this.canRefresh) {
-          await this.client.handleRefreshTokens();
-
-          // 2. When user is returning to the app after authentication
-        } else if (!this.isAuthenticated && isRedirectFromCryptr()) {
-          await this.client.handleRedirectCallback();
-        }
-      } catch (e) {
-        this.error = e;
-      } finally {
-        this.isAuthenticated = await this.client.isAuthenticated();
-
-        this.user = await this.client.getUser();
-
-        this.loading = false;
-      }
-    },
-
-    methods: {
-      signInWithRedirect() {
-        return this.client.signInWithRedirect();
-      },
-      signUpWithRedirect() {
-        return this.client.signUpWithRedirect();
-      },
-      logout() {
-        this.loading = true;
-        this.client.logOut();
-        this.loading = false;
-        return true;
-      }
-    }
-  });
-
-  return clientWrapper;
-};
-
-export default {
-  install(Vue, options) {
-    Vue.prototype.$cryptr = setCryptrClientWrapper(options);
-  }
-};
+```bash
+touch .env.local
 ```
 
-[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/04-add-your-cryptr-credentials)
+Then **fill the .env** file with the follwing variables. Don't forget to replace `YOUR_CLIENT_ID` & `YOUR_DOMAIN`
+
+```bash
+VUE_APP_AUDIENCE=http://localhost:8080
+VUE_APP_CLIENT_ID=YOUR_CLIENT_ID
+VUE_APP_DEFAULT_LOCALE=en
+VUE_APP_DEFAULT_REDIRECT_URI=http://localhost:8080
+VUE_APP_TENANT_DOMAIN=YOUR_DOMAIN
+VUE_APP_CRYPTR_TELEMETRY=FALSE
+```
+
+Integrate to Vue your CryptrPLugin with your credentials.
+
+```javascript
+// src/main.js
+
+// ...
+import router from "./router";
+// 1. Import yor plugin
+import CryptrPlugin from "./CryptrPlugin";
+
+Vue.config.productionTip = false;
+
+// 2. Prepare a clean import of your var envs from your .env
+const cryptrConfig = {
+  audience: process.env.VUE_APP_AUDIENCE,
+  client_id: process.env.VUE_APP_CLIENT_ID,
+  cryptr_base_url: process.env.VUE_APP_CRYPTR_BASE_URL,
+  default_locale: process.env.VUE_APP_DEFAULT_LOCALE,
+  default_redirect_uri: process.env.VUE_APP_DEFAULT_REDIRECT_URI,
+  telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY,
+  tenant_domain: process.env.VUE_APP_TENANT_DOMAIN
+};
+
+// 3. Add the plugin to Vue with your Cryptr config
+Vue.use(CryptrPlugin, cryptrConfig);
+
+new Vue({
+// ...
+```
+
+[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/05-protect-your-routes)
