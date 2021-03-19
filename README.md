@@ -1,17 +1,13 @@
 # Cryptr with Vue2
 
-## 01 - Project setup
+## 02 - Add Cryptr SPA SDK
 
-Start to create a new Vue2 app
+Cryptr SPA SDK will provide **all features you need** to your app with a respect of authentication standards like **OAuth2 & Proof Key Exchange**.
 
-```
-vue create cryptr-vue2-sample
-```
-
-Couple of options are available, it depends mainly on your preferences, but you need to **add Router to handle protected routes**, & this tutorial is for *Vue2* (but Vue3 could work).
+To add this library
 
 ```
-cd cryptr-vue2-sample
+yarn add @cryptr/cryptr-spa-sdk
 ```
 
-[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/02-add-cryptr-sdk)
+[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/03-integrate-the-cryptr-plugin)
