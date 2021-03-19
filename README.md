@@ -1,54 +1,122 @@
 # Cryptr with Vue2
 
-## 04 Add your Cryptr credentials
+## 05 Protect your routes
 
-Now, we do the necessary to make able Cryptr to identify your app & perform well the authentication.
+Now is the time to **protect your private pages** with a **guard**. Thanks to this little helper. we will easily take advantage of the Vue router.
 
-Add a **dot env file** to provide to your environment with your shell.
-
-```bash
-touch .env.local
-```
-
-Then **fill the .env** file with the follwing variables. Don't forget to replace `YOUR_CLIENT_ID` & `YOUR_DOMAIN`
+Create the file
 
 ```bash
-VUE_APP_AUDIENCE=http://localhost:8080
-VUE_APP_CLIENT_ID=YOUR_CLIENT_ID
-VUE_APP_DEFAULT_LOCALE=en
-VUE_APP_DEFAULT_REDIRECT_URI=http://localhost:8080
-VUE_APP_TENANT_DOMAIN=YOUR_DOMAIN
-VUE_APP_CRYPTR_TELEMETRY=FALSE
+touch src/CryptrGuard.js
 ```
 
-Integrate to Vue your CryptrPLugin with your credentials.
+And copy/paste :
 
 ```javascript
-// src/main.js
+// src/CryptrGuard.js
 
-// ...
-import router from "./router";
-// 1. Import yor plugin
-import CryptrPlugin from "./CryptrPlugin";
+import { getCryptrClient } from "./CryptrPlugin";
 
-Vue.config.productionTip = false;
+export const cryptrGuard = (to, from, next) => {
+  const cryptr = getCryptrClient();
 
-// 2. Prepare a clean import of your var envs from your .env
-const cryptrConfig = {
-  audience: process.env.VUE_APP_AUDIENCE,
-  client_id: process.env.VUE_APP_CLIENT_ID,
-  cryptr_base_url: process.env.VUE_APP_CRYPTR_BASE_URL,
-  default_locale: process.env.VUE_APP_DEFAULT_LOCALE,
-  default_redirect_uri: process.env.VUE_APP_DEFAULT_REDIRECT_URI,
-  telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY,
-  tenant_domain: process.env.VUE_APP_TENANT_DOMAIN
+  // 1. Check if user is authenticated
+  const signinUnlessAuthenticated = () => {
+    if (cryptr.isAuthenticated) {
+      return next();
+    }
+
+    cryptr.signInWithRedirect();
+  };
+
+  // 2. Handle loading as a guard clause
+  if (!cryptr.loading) {
+    return signinUnlessAuthenticated();
+  }
+
+  // 3. Watch the loading to call again
+  // the signinUnlessAuthenticated() function
+  cryptr.$watch("loading", loading => {
+    if (!loading) {
+      return signinUnlessAuthenticated();
+    }
+  });
 };
-
-// 3. Add the plugin to Vue with your Cryptr config
-Vue.use(CryptrPlugin, cryptrConfig);
-
-new Vue({
-// ...
 ```
 
-[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/05-protect-your-routes)
+**Import the CryptrGuard in your router**. Then, ename `views/About.vue` to `views/Profile.vue`, it will be our page we want to **make unavailable from a user without session**, then replace the about part to profile in the router.
+On **each route to protect you need to a guard clause** to check the user before to enter.
+
+```javascript
+  // src/routes/index.Js
+
+  // ..
+  import VueRouter from "vue-router";
+  // 1. Import your CryptrGuard
+  import { cryptrGuard } from "../CryptrGuard";
+  import Home from "../views/Home.vue";
+  //...
+
+  //...
+   component: Home
+  },
+  // 2. Import your CryptrGuard
+  {
+    path: "/profile",
+    name: "Profile",
+    // 3. Add the cryptrGuard here to protect the "/profile route"
+    beforeEnter: cryptrGuard,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Profile.vue"),
+  },
+  //...
+
+```
+
+The Cryptr plugin will provide you all functions you need directly to your templates, for a good demonstration, copy paste in your `src/App.vue` :
+
+```javascript
+<template>
+  <div id="app">
+    <div id="nav">
+      <router-link to="/" style="margin-right: 5px;">Home</router-link>
+      <span v-if="!$cryptr.isLoading && !$cryptr.isAuthenticated">
+        <button
+          v-on:click="$cryptr.signInWithRedirect"
+          to="#"
+          style="margin-right: 5px;"
+        >
+          Login
+        </button>
+        <button
+          v-on:click="$cryptr.signUpWithRedirect"
+          to="#"
+          style="margin-right: 5px;"
+        >
+          Signup
+        </button>
+      </span>
+
+      <router-link to="/profile">Protected route</router-link>
+
+      <button
+        v-if="$cryptr.isAuthenticated"
+        v-on:click="$cryptr.logout"
+        to="#"
+        style="margin-left: 5px;"
+      >
+        Logout
+      </button>
+    </div>
+    <router-view />
+  </div>
+</template>
+/// ...
+
+```
+
+
+[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/06-decode-your-user-data)
