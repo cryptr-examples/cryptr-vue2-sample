@@ -1,12 +1,3 @@
-# Cryptr with Vue2
-
-## 03 Integrate the cryptr plugin
-
-Cryptr SDK fits well with Vue JS., you just need to add the follow file **CryptrPlugin.js**  as Vue2 plugin **in your src**  :
-
-``` javascript
-// src/CryptrPlugin.js 
-
 import Vue from "vue";
 import CryptrSPA from "@cryptr/cryptr-spa-js";
 
@@ -84,6 +75,3 @@ export default {
     Vue.prototype.$cryptr = setCryptrClientWrapper(options);
   }
 };
-```
-
-[Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/03-integrate-the-cryptr-plugin)
