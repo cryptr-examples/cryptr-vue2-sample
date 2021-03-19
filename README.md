@@ -8,7 +8,7 @@ Start to create a new Vue2 app
 vue create cryptr-vue2-sample
 ```
 
-Couple of options are available, it depends mainly on your preferences, but you need to *add Router to handle protected routes*, & this tutorial is for *Vue2* (but Vue3 could work).
+Couple of options are available, it depends mainly on your preferences, but you need to **add Router to handle protected routes**, & this tutorial is for *Vue2* (but Vue3 could work).
 
 ```
 cd cryptr-vue2-sample
