@@ -7,7 +7,7 @@ Cryptr SPA SDK will provide **all features you need** to your app with a respect
 To add this library
 
 ```
-yarn add @cryptr/cryptr-spa-sdk
+yarn add @cryptr/cryptr-spa-js
 ```
 
 [Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/03-integrate-the-cryptr-plugin)
