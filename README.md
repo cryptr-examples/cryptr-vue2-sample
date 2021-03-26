@@ -1,12 +1,12 @@
 # Cryptr with Vue2
 
-## 02 - Add Cryptr SPA SDK
+## 02 - Add Cryptr SPA JS
 
-Cryptr SPA SDK will provide **all features you need** to your app with a respect of authentication standards like **OAuth2 & Proof Key Exchange**.
+Cryptr SPA JS will provide **all the features you need** to your app while respecting authentication standards such as **OAuth2 & Proof Key Exchange**.
 
-To add this library
+To add this library:
 
-```
+```bash
 yarn add @cryptr/cryptr-spa-js
 ```
 
