@@ -4,13 +4,32 @@
 
 Start to create a new Vue2 app
 
-```
+```bash
 vue create cryptr-vue2-sample
 ```
 
-Couple of options are available, it depends mainly on your preferences, but you need to **add Router to handle protected routes**, & this tutorial is for *Vue2* (but Vue3 could work).
+A couple of options are available, it mainly depends on your preferences, but you need to **add Router to handle protected routes**, & this tutorial is for *Vue2* (but Vue3 could work).
 
-```
+The options that this tutorial uses:
+
+Pick a preset:  
+
+- Manually select features
+
+Check the features needed for your project:  
+
+- Choose Vue version  
+- Babel  
+- Router (We need to add a router in order to do this tutorial)  
+- Linter/Formatter  
+
+Choose a version of Vue.js that you want to start the project with:  
+
+- 2.x
+
+For other options, you can choose as you like.
+
+```bash
 cd cryptr-vue2-sample
 ```
 
