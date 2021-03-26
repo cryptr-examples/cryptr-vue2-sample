@@ -4,13 +4,13 @@
 
 Now, we do the necessary to make able Cryptr to identify your app & perform well the authentication.
 
-Add a **dot env file** to provide to your environment with your shell.
+Add a **.env file** to your environment using the shell.
 
 ```bash
 touch .env.local
 ```
 
-Then **fill the .env** file with the follwing variables. Don't forget to replace `YOUR_CLIENT_ID` & `YOUR_DOMAIN`
+Then **fill the .env** file with the following variables. Don't forget to replace `YOUR_CLIENT_ID` & `YOUR_DOMAIN`
 
 ```bash
 VUE_APP_AUDIENCE=http://localhost:8080
@@ -21,7 +21,7 @@ VUE_APP_TENANT_DOMAIN=YOUR_DOMAIN
 VUE_APP_CRYPTR_TELEMETRY=FALSE
 ```
 
-Integrate to Vue your CryptrPLugin with your credentials.
+Integrate your CryptrPLugin with your credentials to Vue.
 
 ```javascript
 // src/main.js
