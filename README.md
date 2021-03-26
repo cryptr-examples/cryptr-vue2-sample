@@ -2,9 +2,9 @@
 
 ## 03 Integrate the cryptr plugin
 
-The best way to effectively implement a user authentication flow is to create a reusable wrapper around Cryptr's SDK to integrate directly into Vue to take advantage from all the Cryptr features.
+The best way to effectively implement a user authentication flow is to create a reusable wrapper around Cryptr's SDK to integrate directly into Vue in order to take advantage of all the Cryptr features.
 
-In this way, the Cryptr SDK  will fit well with Vue JS. You just need to add the follow file **CryptrPlugin.js**  as Vue2 plugin **in your src**  :
+In this way, the Cryptr SDK will fit well with Vue JS. You just need to add the following file **CryptrPlugin.js** as a Vue2 plugin **in your src**:
 
 ``` javascript
 // src/CryptrPlugin.js 
