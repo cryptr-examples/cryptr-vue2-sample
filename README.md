@@ -2,15 +2,15 @@
 
 ## 05 Protect your routes
 
-Now is the time to **protect your private pages** with a **guard**. Thanks to this little helper. we will easily take advantage of the Vue router.
+Now is the time to **protect your private pages** with a **guard**. Thanks to this little helper, we will easily take advantage of the Vue router.
 
-Create the file
+Create the file:
 
 ```bash
 touch src/CryptrGuard.js
 ```
 
-And copy/paste :
+Copy and paste:
 
 ```javascript
 // src/CryptrGuard.js
@@ -44,8 +44,8 @@ export const cryptrGuard = (to, from, next) => {
 };
 ```
 
-**Import the CryptrGuard in your router**. Then, ename `views/About.vue` to `views/Profile.vue`, it will be our page we want to **make unavailable from a user without session**, then replace the about part to profile in the router.
-On **each route to protect you need to a guard clause** to check the user before to enter.
+**Import the CryptrGuard in your router**. Then, rename `views/About.vue` to `views/Profile.vue`, it will be the page we want to **make unavailable from a user without session**, then replace the about part with profile in the router.
+On **each route to protect you need to add a guard clause** to check the user before to enter.
 
 ```javascript
   // src/routes/index.Js
@@ -76,7 +76,7 @@ On **each route to protect you need to a guard clause** to check the user before
 
 ```
 
-The Cryptr plugin will provide you all functions you need directly to your templates, for a good demonstration, copy paste in your `src/App.vue` :
+The Cryptr plugin will provide you all functions you need directly to your templates, for a good demonstration, copy and paste the following code in your `src/App.vue`:
 
 ```javascript
 <template>
@@ -117,6 +117,5 @@ The Cryptr plugin will provide you all functions you need directly to your templ
 /// ...
 
 ```
-
 
 [Next](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/06-decode-your-user-data)
