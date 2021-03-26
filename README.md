@@ -1,8 +1,8 @@
 # Cryptr with Vue2
 
-## 05 Protect your routes
+## 06 Decode your user data
 
-Cryptr user data can be decoded easely, try inside your profile page :
+Cryptr user data can be decoded easily, try the following code inside your profile page:
 
 ```javascript
 <template>
@@ -18,4 +18,4 @@ Cryptr user data can be decoded easely, try inside your profile page :
 </template>
 ```
 
-That's all 🙂
+That's all, I hope this was helpful, and thanks for reading! 🙂
