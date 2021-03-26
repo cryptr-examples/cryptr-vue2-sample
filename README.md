@@ -20,8 +20,10 @@ Check the features needed for your project:
 
 - Choose Vue version  
 - Babel  
-- Router (We need to add a router in order to do this tutorial)  
+- Router  
 - Linter/Formatter  
+
+Note: __A router is required for this tutorial, it is essential to check the box in order to do this tutorial__
 
 Choose a version of Vue.js that you want to start the project with:  
 
