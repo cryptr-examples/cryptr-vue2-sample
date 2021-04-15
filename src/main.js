@@ -15,7 +15,7 @@ const cryptrConfig = {
   default_redirect_uri: process.env.VUE_APP_DEFAULT_REDIRECT_URI,
   region: process.env.VUE_APP_CRYPTR_REGION,
   telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY,
-  tenant_domain: process.env.VUE_APP_TENANT_DOMAIN
+  tenant_domain: process.env.VUE_APP_TENANT_DOMAIN,
 };
 
 // 3. Add the plugin to Vue with your Cryptr config

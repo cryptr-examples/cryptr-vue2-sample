@@ -9,7 +9,7 @@ const isRedirectFromCryptr = () =>
 
 export const getCryptrClient = () => clientWrapper;
 
-const setCryptrClientWrapper = options => {
+const setCryptrClientWrapper = (options) => {
   if (clientWrapper) {
     return clientWrapper;
   }
@@ -22,7 +22,7 @@ const setCryptrClientWrapper = options => {
         isAuthenticated: false,
         canRefresh: false,
         loading: true,
-        user: null
+        user: null,
       };
     },
 
@@ -63,8 +63,8 @@ const setCryptrClientWrapper = options => {
         this.client.logOut();
         this.loading = false;
         return true;
-      }
-    }
+      },
+    },
   });
 
   return clientWrapper;
@@ -73,5 +73,5 @@ const setCryptrClientWrapper = options => {
 export default {
   install(Vue, options) {
     Vue.prototype.$cryptr = setCryptrClientWrapper(options);
-  }
+  },
 };

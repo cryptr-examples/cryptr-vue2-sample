@@ -60,11 +60,10 @@ On **each route to protect you need to add a guard clause** to check the user be
   //...
    component: Home
   },
-  // 2. Import your CryptrGuard
   {
     path: "/profile",
     name: "Profile",
-    // 3. Add the cryptrGuard here to protect the "/profile route"
+    // 2. Add the cryptrGuard here to protect the "/profile route"
     beforeEnter: cryptrGuard,
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
