@@ -869,10 +869,10 @@
   resolved "https://registry.yarnpkg.com/@cryptr/cryptr-config-validation/-/cryptr-config-validation-0.1.0.tgz#51816c6b6961474663a33a72bb7eb978ce1591d6"
   integrity sha512-uB8E9iwTjHExzlCCLr8ZH6KybidnmUb+M+qjJK3YIxognRkzEo4qpioabSHqCYsP6hYrbdtr8QpaiKHC0CWjaw==
 
-"@cryptr/cryptr-spa-js@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@cryptr/cryptr-spa-js/-/cryptr-spa-js-0.1.7.tgz#f9361b838439288f2f16a43de7d892089d4deeee"
-  integrity sha512-fKJGh0iG/iRiZA++6YALnhFYuo8OaRXatKQKDTytvbeMxkPRpmbyPTKYqYhlPAv3av//4o4kyOZwSLLoMK0C6A==
+"@cryptr/cryptr-spa-js@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@cryptr/cryptr-spa-js/-/cryptr-spa-js-0.1.10.tgz#c22b616f784dafbd3a5264dc83acfddd7104f78b"
+  integrity sha512-bfaY5BX/t9hH9s0tzlwgSLmjoSoxBpHMiI28BGfVfEgd0l5+JuUtUpbGE0M5yEUetKZ5ffbBBXtYQEEhRLYzQA==
   dependencies:
     "@cryptography/sha256" "^0.2.0"
     "@cryptr/cryptr-config-validation" "^0.1.0"
