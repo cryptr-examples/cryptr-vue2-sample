@@ -1,8 +1,34 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/" style="margin-right: 5px">Home</router-link>
+      <span v-if="!$cryptr.isLoading && !$cryptr.isAuthenticated">
+        <button
+          v-on:click="$cryptr.signInWithRedirect"
+          to="#"
+          style="margin-right: 5px"
+        >
+          Login
+        </button>
+        <button
+          v-on:click="$cryptr.signUpWithRedirect"
+          to="#"
+          style="margin-right: 5px"
+        >
+          Signup
+        </button>
+      </span>
+
+      <router-link to="/profile">Protected route</router-link>
+
+      <button
+        v-if="$cryptr.isAuthenticated"
+        v-on:click="$cryptr.logout"
+        to="#"
+        style="margin-left: 5px"
+      >
+        Logout
+      </button>
     </div>
     <router-view />
   </div>
