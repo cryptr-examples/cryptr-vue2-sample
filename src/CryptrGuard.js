@@ -19,7 +19,7 @@ export const cryptrGuard = (to, from, next) => {
 
   // 3. Watch the loading to call again
   // the signinUnlessAuthenticated() function
-  cryptr.$watch("loading", loading => {
+  cryptr.$watch("loading", (loading) => {
     if (!loading) {
       return signinUnlessAuthenticated();
     }
