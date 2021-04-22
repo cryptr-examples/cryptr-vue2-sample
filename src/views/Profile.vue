@@ -9,7 +9,7 @@
     </ul>
     <hr />
     <h4>My Courses</h4>
-    <div style="text-align: left;padding:.5rem 4rem;">
+    <div style="text-align: left; padding: 0.5rem 4rem">
       <div
         v-if="courses && courses.length"
         style="padding:2rem;border-radius:.5rem;max-width:100%;width:100%;box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);overflow:hidden;margin:2rem auto;flew-wrap:wrapdisplay:flex;border-width:1px;"
@@ -24,9 +24,7 @@
           </div>
           <div>
             <div>
-              <p>
-                Members only
-              </p>
+              <p>Members only</p>
               <h2
                 style="
                   color: rgb(17, 24, 39);
