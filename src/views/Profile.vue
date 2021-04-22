@@ -102,7 +102,10 @@ export default {
         console.log(data);
         this.courses = data.data;
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        this.errors = [error];
+      });
   },
 };
 </script>
