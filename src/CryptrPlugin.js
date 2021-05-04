@@ -64,6 +64,9 @@ const setCryptrClientWrapper = (options) => {
         this.loading = false;
         return true;
       },
+      decoratedRequest(axiosRequestConfig) {
+        return this.client.decoratedRequest(axiosRequestConfig);
+      },
     },
   });
 
