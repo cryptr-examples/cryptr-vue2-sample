@@ -17,7 +17,6 @@ const cryptrConfig = {
   telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY == "true",
   tenant_domain: process.env.VUE_APP_TENANT_DOMAIN,
 };
-console.debug(cryptrConfig)
 
 // 3. Add the plugin to Vue with your Cryptr config
 Vue.use(CryptrPlugin, cryptrConfig);
