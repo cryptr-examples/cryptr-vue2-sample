@@ -31,14 +31,20 @@ const setCryptrClientWrapper = (options) => {
       this.loading = true;
       this.isAuthentcated = this.client.isAuthentcated;
       this.canRefresh = this.client.canRefresh(this.client.getRefreshStore());
+      this.canHandleRefresh = !this.isAuthenticated && this.canRefresh;
+      this.canHandleRedirect = !this.isAuthenticated && isRedirectFromCryptr();
+      this.canHandleInvitation = !this.isAuthenticated && this.client.canHandleInvitation();
+
       try {
         // 1. When user is returning to its browser
-        if (!this.isAuthenticated && this.canRefresh) {
+        if (this.canHandleRefresh) {
           await this.client.handleRefreshTokens();
 
           // 2. When user is returning to the app after authentication
-        } else if (!this.isAuthenticated && isRedirectFromCryptr()) {
+        } else if (this.canHandleRedirect) {
           await this.client.handleRedirectCallback();
+        } else if (this.canHandleInvitation) {
+          await this.client.handleInvitationState();
         }
       } catch (e) {
         this.error = e;
