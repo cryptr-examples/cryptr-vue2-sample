@@ -3,6 +3,10 @@ import { getCryptrClient } from "./CryptrPlugin";
 export const cryptrGuard = (to, from, next) => {
   const cryptr = getCryptrClient();
 
+  // 0. Check Invitation process
+  const invitationPresence = () => {
+    return cryptr.client.canHandleInvitation()
+  }
   // 1. Check if user is authenticated
   const signinUnlessAuthenticated = () => {
     if (cryptr.isAuthenticated) {
@@ -21,7 +25,7 @@ export const cryptrGuard = (to, from, next) => {
   // the signinUnlessAuthenticated() function
   cryptr.$watch("loading", (loading) => {
     if (!loading) {
-      return signinUnlessAuthenticated();
+      return !invitationPresence() && !signinUnlessAuthenticated();
     }
   });
 };

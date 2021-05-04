@@ -1,13 +1,32 @@
 # Cryptr with Vue2
 
-## [01 Create a Vue app](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/01-create-vue-app)
+## 08 InvitationIntegration
 
-## [02 Add Cryptr SDK](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/02-add-cryptr-sdk)
+To be able to handle invitation on Vue app, some things has to be done.
 
-## [03 Integrate the Cryptr plugin](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/03-integrate-the-cryptr-plugin)
+1. Ensure that your `VueRouter` has  `model 'history'`
+2. Handle invitation adding the following block in your `created()` function
 
-## [04 Add your cryptr credentials](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/04-add-your-cryptr-credentials)
+```typescript
+this.canHandleInvitation = !this.isAuthenticated && this.client.canHandleInvitation();
 
-## [05 Protect your routes](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/05-protect-your-routes)
+try {
+//... to before catch
+else if (this.canHandleInvitation) {
+  await this.client.handleInvitationState();
+}
+```
 
-## [06 Decode your user data](https://github.com/cryptr-examples/cryptr-vue2-sample/tree/06-decode-your-user-data)
+3. Update `CryptrGuard` to avoid early sign in redirect
+
+```typescript
+const invitationPresence = () => {
+  return cryptr.client.canHandleInvitation()
+}
+//...
+cryptr.$watch("loading", (loading) => {
+  if (!loading) {
+    return !invitationPresence() && !signinUnlessAuthenticated();
+  }
+});
+```

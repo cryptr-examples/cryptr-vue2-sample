@@ -14,7 +14,7 @@ const cryptrConfig = {
   default_locale: process.env.VUE_APP_DEFAULT_LOCALE,
   default_redirect_uri: process.env.VUE_APP_DEFAULT_REDIRECT_URI,
   region: process.env.VUE_APP_CRYPTR_REGION,
-  telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY,
+  telemetry: process.env.VUE_APP_CRYPTR_TELEMETRY == "true",
   tenant_domain: process.env.VUE_APP_TENANT_DOMAIN,
 };
 
